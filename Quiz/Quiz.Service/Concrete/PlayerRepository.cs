@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Quiz.Data;
 using Quiz.Data.Entities.Concrete;
 using Quiz.Service.Abstraction;
@@ -17,6 +18,7 @@ namespace Quiz.Service.Concrete
 
         public void CreatePlayer(Player player)
         {
+            //player.Id=Guid.NewGuid();
             Create(player);
         }
 
@@ -32,7 +34,7 @@ namespace Quiz.Service.Concrete
 
         public async Task<Player> GetPlayerByIdAsync(Guid playerId)
         {
-            return await FindByCondition(p=>p.Id == playerId).FirstOrDefaultAsync();
+            return await FindByCondition(p => p.Id == playerId).FirstOrDefaultAsync();
         }
 
         public void UpdatePlayer(Player player)
