@@ -15,11 +15,8 @@ namespace Quiz.Service
     {
         public static void AddServiceServices(this IServiceCollection services)
         {
-            //services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-            //services.AddScoped<IEventRepository, EventRepository>();
-            //services.AddScoped<IQuestionRepository, QuestionRepository>();
-            //services.AddScoped<IPlayerRepository, PlayerRepository>();
-
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IEventService, EventService>();
         }
     }

@@ -18,7 +18,7 @@ namespace Quiz.Service.Concrete
             _context = context;
         }
 
-        public void InitAndAddQuestions15()
+        public void InitAndAddQuestions15(Guid playerId)
         {
             Event _event = new Event();
             _event.Id = Guid.NewGuid();
@@ -31,10 +31,12 @@ namespace Quiz.Service.Concrete
             var mediums = _context.Questions.Where(q => q.Difficulty == Data.Entities.Abstraction.IQuestion._Difficulty.Medium).Select(q => q.Id).OrderBy(q => Guid.NewGuid()).Take(5).ToList();
             var hards = _context.Questions.Where(q => q.Difficulty == Data.Entities.Abstraction.IQuestion._Difficulty.Hard).Select(q => q.Id).OrderBy(q => Guid.NewGuid()).Take(5).ToList();
             questionIds = easies.Concat(mediums).Concat(hards).ToList();
+            _event.PlayerId = playerId;
             _event.QuestionIds = questionIds;
             _context.Events.Add(_event);
             _context.SaveChanges();
 
         }
+
     }
 }

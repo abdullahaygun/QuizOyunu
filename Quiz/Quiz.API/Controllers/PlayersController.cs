@@ -9,22 +9,22 @@ namespace Quiz.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class PlayersController : ControllerBase
     {
         private readonly QuizDbContext _context;
-        private readonly IEventService _eventService;
+        private readonly IPlayerService _playerService;
 
-        public EventsController(QuizDbContext context, IEventService eventService)
+        public PlayersController(QuizDbContext context, IPlayerService playerService)
         {
             _context = context;
-            _eventService = eventService;
+            _playerService = playerService;
         }
 
         [HttpPost]
-        [Route("[action]/{playerId}")]
-        public void EventOlustur(Guid playerId)
+        [Route("[action]/{nick}")]
+        public void Add(string nick)
         {
-            _eventService.InitAndAddQuestions15(playerId);
+            _playerService.Add(nick);
         }
     }
 }

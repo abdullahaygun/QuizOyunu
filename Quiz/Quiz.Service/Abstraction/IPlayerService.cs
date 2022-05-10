@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Quiz.Service.Abstraction
 {
-    public interface IEventService
+    public interface IPlayerService
     {
-        public void InitAndAddQuestions15(Guid playerId);
+        public void Add(string nick);
     }
 }
