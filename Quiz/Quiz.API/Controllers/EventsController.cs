@@ -2,6 +2,7 @@
 using Quiz.Data;
 using Quiz.Data.Entities.Concrete;
 using Quiz.Service.Abstraction;
+//using Quiz.Service.Abstraction;
 using Quiz.Service.Concrete;
 
 namespace Quiz.API.Controllers
@@ -10,20 +11,20 @@ namespace Quiz.API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private IRepositoryWrapper _repository;
+        private readonly QuizDbContext _context;
+        private readonly IEventService _eventService;
 
-        public EventsController(IRepositoryWrapper repository)
+        public EventsController(QuizDbContext context, IEventService eventService)
         {
-            _repository = repository;
+            _context = context;
+            _eventService = eventService;
         }
 
-        [Route("action")]
         [HttpPost]
-        public async Task<IActionResult> Add(Event _event)
+        [Route("[action]")]
+        public void EventOlustur()
         {
-            _repository.Event.CreateEvent(_event);
-            await _repository.SaveAsync();
-            return Ok(_event);
+            _eventService.InitAndAddQuestions15();
         }
     }
 }

@@ -7,12 +7,11 @@ namespace Quiz.Data.Entities.Concrete
     {
         private Player _Player;
         private Guid _PlayerId;
-        private List<Question> _Questions;
+        private List<Guid>? _QuestionIds;
         private _Joker _Joker;
 
-        public Player Player { get => _Player; set => _Player = value; }
         public Guid PlayerId { get => _PlayerId; set => _PlayerId = value; }
-        public List<Question> Questions { get => _Questions; set => _Questions = value; }
-        public _Joker Joker { get => _Joker; set => _Joker = value; }
+        public List<Guid>? QuestionIds { get => _QuestionIds; set => _QuestionIds = value; }
+        //public _Joker Joker { get => _Joker; set => _Joker = value; }
     }
 }

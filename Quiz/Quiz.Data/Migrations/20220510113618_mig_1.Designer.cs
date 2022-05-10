@@ -13,7 +13,7 @@ using Quiz.Data;
 namespace Quiz.Data.Migrations
 {
     [DbContext(typeof(QuizDbContext))]
-    [Migration("20220509200330_mig_1")]
+    [Migration("20220510113618_mig_1")]
     partial class mig_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,24 +31,22 @@ namespace Quiz.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Joker")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("PlayerId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+                    b.Property<List<Guid>>("QuestionIds")
+                        .HasColumnType("uuid[]");
 
-                    b.HasIndex("PlayerId");
+                    b.HasKey("Id");
 
                     b.ToTable("Events");
                 });
@@ -59,13 +57,13 @@ namespace Quiz.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Nick")
@@ -87,14 +85,11 @@ namespace Quiz.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text[]");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Difficulty")
                         .HasColumnType("integer");
-
-                    b.Property<Guid?>("EventId")
-                        .HasColumnType("uuid");
 
                     b.Property<int>("IndexCorrectAnswer")
                         .HasColumnType("integer");
@@ -102,7 +97,7 @@ namespace Quiz.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("QuestionBody")
@@ -111,32 +106,7 @@ namespace Quiz.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
-
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("Quiz.Data.Entities.Concrete.Event", b =>
-                {
-                    b.HasOne("Quiz.Data.Entities.Concrete.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("Quiz.Data.Entities.Concrete.Question", b =>
-                {
-                    b.HasOne("Quiz.Data.Entities.Concrete.Event", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("EventId");
-                });
-
-            modelBuilder.Entity("Quiz.Data.Entities.Concrete.Event", b =>
-                {
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

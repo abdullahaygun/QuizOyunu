@@ -10,10 +10,10 @@ namespace Quiz.Data.Entities.Abstraction
 {
     public interface IEvent
     {
-        public Player Player { get; set; }
+        //public Player Player { get; set; }
         public Guid PlayerId { get; set; }
-        public List<Question> Questions { get; set; }
-        public _Joker Joker { get; set; }
+        public List<Guid>? QuestionIds { get; set; }
+        //public _Joker Joker { get; set; }
         public enum _Joker
         {
             [Display(Description = "Seyircilerin 10 saniye içinde verecekleri cevap ile şıklar belirli yüzdelik değerler kazanır.", Name = "Seyirciye Sorma", ShortName = "Seyirciye Sorma")]
